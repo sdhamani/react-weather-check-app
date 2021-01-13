@@ -19,3 +19,12 @@ select , button {
   border-radius: 50px;
   cursor: pointer;
 }
+
+.img{
+  height: 150x;
+  width: 150px;
+}
+
+.result{
+  text-align: center;
+}
