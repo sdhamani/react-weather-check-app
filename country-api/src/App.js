@@ -1,6 +1,6 @@
 import './App.css';
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
 
@@ -14,6 +14,10 @@ function App() {
 
   const [submit , setsubmit] = useState(false);
 
+  const [weather , setweather] = useState("");
+
+  const [imgSRC , setImgSrc] = useState("");
+
   const getCountries = async() => {
     try{
       const country = await axios.get("https://countriesnow.space/api/v0.1/countries");
@@ -22,21 +26,45 @@ function App() {
     catch(error){
       console.log(error); 
     }
-}
+    
+
+    }
 
   function findCities(country){
-      setsubmit(false)
-      setsingleCity(null)
-      setSingleCountry(country)
-      const findcities = countries.find((c) => c.country ===country)
-      setCities(findcities.cities)
+    setsubmit(false)
+    setsingleCity(null)
+    setSingleCountry(country)
+    const findcities = countries.find((c) => c.country === country)
+    setCities(findcities.cities)
     }
 
   function submitHandler(){
-      if(singleCountry && singleCity){
+    if(singleCountry && singleCity){
         setsubmit(true)
-      }
     }
+
+    const options = {
+      method: 'GET',
+      url: 'https://community-open-weather-map.p.rapidapi.com/weather',
+      params: {
+        q: singleCity,
+      },
+      headers: {
+        'x-rapidapi-key': 'ea079904a3msh1659185b9db3094p1c73b4jsn8f8a444ea999',
+        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
+      }
+    };
+  
+    axios.request(options).then(function (response) {
+      setweather(response.data.weather[0])
+      setImgSrc("http://openweathermap.org/img/wn/"+response.data.weather[0].icon+"@2x.png")
+      console.log(imgSRC)
+      console.log(response.data.weather[0]);
+  
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
 
   useEffect(() => {
     getCountries()
@@ -47,8 +75,8 @@ function App() {
       <div className="App-header">
         <h1>Select Your Hometown</h1>
         <div>
-          { countries && <select  onChange={(event) => findCities(event.target.value)} value={singleCountry}>
-            <option disabled selected hidden>
+          { countries && <select  onChange={(e) => findCities(e.target.value)} value={singleCountry}>
+            <option selected hidden disabled>
               select country
             </option>
             {
@@ -57,21 +85,27 @@ function App() {
               )
             }
           </select>}
-          {cities &&  <select onChange ={(event) => (setsingleCity(event.target.value))}  value={singleCity}>
+          {cities && ( <select onChange ={(e) => (setsingleCity(e.target.value))}  value={singleCity}>
             <option disabled selected hidden>
               select town 
             </option>
             {
-              (cities).map((city1) =>
-                <option key={city1} value={city1}>{city1}</option>
+              (cities).map((city) =>
+                <option  value={city}  key={city}>{city}</option>
               ) 
             }
-          </select>}
-          <button onClick={submitHandler()}>Go</button>
+          </select>)}
+          <button onClick={submitHandler}>Go</button>
         </div>
-        <div>
+        <div className="result">
           {
-            submit && (<h1>Your country is {singleCountry} and your city is {singleCity}</h1>)
+            submit && (
+            <div>
+              <img className="img" alt="NA" src={imgSRC}></img>
+              <h3>{weather.description}</h3>
+            </div>
+            )
+            
           }
         </div>
       </div>
@@ -80,4 +114,6 @@ function App() {
 }
 
 export default App;
+
+
 
