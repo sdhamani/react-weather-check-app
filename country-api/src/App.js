@@ -102,7 +102,7 @@ function App() {
             submit && (
             <div>
               <img className="img" alt="NA" src={imgSRC}></img>
-              <h3>{weather.description}</h3>
+              <h3>{(weather.description).toUpperCase()}</h3>
             </div>
             )
             
