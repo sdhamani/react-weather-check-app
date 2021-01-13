@@ -99,10 +99,10 @@ function App() {
         </div>
         <div className="result">
           {
-            submit && (
+            submit && weather.description && (
             <div>
               <img className="img" alt="NA" src={imgSRC}></img>
-              <h3>{(weather.description).toUpperCase()}</h3>
+              {weather.description && <h3>{(weather.description).toUpperCase()}</h3>}
             </div>
             )
             
