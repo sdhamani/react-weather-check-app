@@ -73,7 +73,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-        <h1 style={{textAlign:"center"}}>Select Your Hometown</h1>
+        <h1 style={{textAlign:"center"}}>Check Your Hometown Weather</h1>
         <div >
           { countries && <select className="rowalignment" onChange={(e) => findCities(e.target.value)} value={singleCountry}>
             <option selected hidden disabled>
