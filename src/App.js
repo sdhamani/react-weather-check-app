@@ -34,6 +34,8 @@ function App() {
     setsubmit(false)
     setsingleCity(null)
     setSingleCountry(country)
+    setweather("")
+    setImgSrc("")
     const findcities = countries.find((c) => c.country === country)
     setCities(findcities.cities)
     }
