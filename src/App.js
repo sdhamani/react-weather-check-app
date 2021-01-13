@@ -77,7 +77,7 @@ function App() {
       <div className="App-header">
         <h1 style={{textAlign:"center"}}>Check Your Hometown Weather</h1>
         <div >
-          { countries && <select className="rowalignment" onChange={(e) => findCities(e.target.value)} value={singleCountry}>
+          { countries && <select onChange={(e) => findCities(e.target.value)} value={singleCountry}>
             <option selected hidden disabled>
               select country
             </option>
@@ -88,7 +88,7 @@ function App() {
             }
           </select>}
           {cities && ( <select  className="rowalignment" onChange ={(e) => (setsingleCity(e.target.value))}  value={singleCity}>
-            <option disabled selected hidden>
+            <option selected hidden disabled >
               select town 
             </option>
             {
@@ -97,7 +97,7 @@ function App() {
               ) 
             }
           </select>)}
-          <button className="rowalignment" onClick={submitHandler}>Go</button>
+          <button className="button" onClick={submitHandler}>Go</button>
         </div>
         <div className="result">
           {

@@ -15,11 +15,13 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    text-align: center;
+    border:15px;
+    margin: 10px 49px;
+    
   }
   .button{
-    position: absolute;
-    left: 50%;
+    display: flex;
+    margin:auto
   }
 }
 
