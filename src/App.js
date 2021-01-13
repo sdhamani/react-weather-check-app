@@ -77,7 +77,7 @@ function App() {
       <div className="App-header">
         <h1 style={{textAlign:"center"}}>Check Your Hometown Weather</h1>
         <div >
-          { countries && <select onChange={(e) => findCities(e.target.value)} value={singleCountry}>
+          { countries && <select onChange={(e) => findCities(e.target.value)}>
             <option selected hidden disabled>
               select country
             </option>
